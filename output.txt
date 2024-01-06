@@ -1,0 +1,413 @@
+Begin System Initialization
+========================Create Caches and Directory=======================
+======================Simulation Begin======================
+
+=====================Simulation Loop #1=====================
+
+Expected Transition: Write Miss on Exclusive Block
+CPU2 Writes to Address: 10 with Data: 0
+Sending Message: Type=WriteMiss, Address=10, SourceID=2, DestID=2, Data: 0
+Directory received message type: WriteMiss for address: 10 from CPU2, Data: 0
+Sending Message: Type=DataValueReply, Address=10, SourceID=2, DestID=2, Data: 0
+CPU2 handling message type: DataValueReply for address: 10, Data: 0
+CPU2 Received DataValueReply for Address: 10 Data: 0
+Directory (2) Entry State: Address=10, State=EXCLUSIVE
+Sharers: 2 
+Directory (2) Entry State: Address=10, State=EXCLUSIVE
+Sharers: 2 
+CPU0 Address: 10 State: Not in Cache
+CPU1 Address: 10 State: Not in Cache
+CPU2 Address: 10 State: M Data: 0
+CPU3 Address: 10 State: Not in Cache
+
+Expected Transition: Read Miss on Modified Block
+CPU3 Reads from Address: 11
+Sending Message: Type=ReadMiss, Address=11, SourceID=3, DestID=3, Data: 0
+Directory received message type: ReadMiss for address: 11 from CPU3, Data: 0
+RAM Read at Address: 11, Data: 0
+Sending Message: Type=DataValueReply, Address=11, SourceID=3, DestID=3, Data: 0
+CPU3 handling message type: DataValueReply for address: 11, Data: 0
+CPU3 Received DataValueReply for Address: 11 Data: 0
+Directory (3) Entry State: Address=11, State=SHARED
+Sharers: 3 
+Directory (3) Entry State: Address=11, State=SHARED
+Sharers: 3 
+CPU0 Address: 11 State: Not in Cache
+CPU1 Address: 11 State: Not in Cache
+CPU2 Address: 11 State: Not in Cache
+CPU3 Address: 11 State: S Data: 0
+
+Expected Transition: Shared to Invalid due to Other CPU Write
+CPU0 Writes to Address: 13 with Data: 250
+Sending Message: Type=WriteMiss, Address=13, SourceID=0, DestID=0, Data: 250
+Directory received message type: WriteMiss for address: 13 from CPU0, Data: 250
+Sending Message: Type=DataValueReply, Address=13, SourceID=0, DestID=0, Data: 250
+CPU0 handling message type: DataValueReply for address: 13, Data: 250
+CPU0 Received DataValueReply for Address: 13 Data: 250
+Directory (0) Entry State: Address=13, State=EXCLUSIVE
+Sharers: 0 
+Directory (0) Entry State: Address=13, State=EXCLUSIVE
+Sharers: 0 
+CPU0 Address: 13 State: M Data: 250
+CPU1 Address: 13 State: Not in Cache
+CPU2 Address: 13 State: Not in Cache
+CPU3 Address: 13 State: Not in Cache
+
+Expected Transition: Modified to Invalid (Direct Invalidation)
+CPU1 Writes to Address: 14 with Data: 0
+Sending Message: Type=WriteMiss, Address=14, SourceID=1, DestID=1, Data: 0
+Directory received message type: WriteMiss for address: 14 from CPU1, Data: 0
+Sending Message: Type=DataValueReply, Address=14, SourceID=1, DestID=1, Data: 0
+CPU1 handling message type: DataValueReply for address: 14, Data: 0
+CPU1 Received DataValueReply for Address: 14 Data: 0
+Directory (1) Entry State: Address=14, State=EXCLUSIVE
+Sharers: 1 
+Directory (1) Entry State: Address=14, State=EXCLUSIVE
+Sharers: 1 
+CPU0 Address: 14 State: Not in Cache
+CPU1 Address: 14 State: M Data: 0
+CPU2 Address: 14 State: Not in Cache
+CPU3 Address: 14 State: Not in Cache
+
+Expected Transition: Invalid to Shared due to CPU Read
+CPU0 Reads from Address: 0
+Sending Message: Type=ReadMiss, Address=0, SourceID=0, DestID=0, Data: 0
+Directory received message type: ReadMiss for address: 0 from CPU0, Data: 0
+RAM Read at Address: 0, Data: 0
+Sending Message: Type=DataValueReply, Address=0, SourceID=0, DestID=0, Data: 0
+CPU0 handling message type: DataValueReply for address: 0, Data: 0
+CPU0 Received DataValueReply for Address: 0 Data: 0
+Directory (0) Entry State: Address=0, State=SHARED
+Sharers: 0 
+Directory (0) Entry State: Address=0, State=SHARED
+Sharers: 0 
+CPU0 Address: 0 State: S Data: 0
+CPU1 Address: 0 State: Not in Cache
+CPU2 Address: 0 State: Not in Cache
+CPU3 Address: 0 State: Not in Cache
+
+Expected Transition: Shared to Modified due to CPU Write
+CPU1 Writes to Address: 0 with Data: 100
+Sending Message: Type=WriteMiss, Address=0, SourceID=1, DestID=1, Data: 100
+Directory received message type: WriteMiss for address: 0 from CPU1, Data: 100
+Sending Message: Type=DataValueReply, Address=0, SourceID=1, DestID=1, Data: 100
+CPU1 handling message type: DataValueReply for address: 0, Data: 100
+CPU1 Received DataValueReply for Address: 0 Data: 100
+Directory (1) Entry State: Address=0, State=EXCLUSIVE
+Sharers: 1 
+Directory (1) Entry State: Address=0, State=EXCLUSIVE
+Sharers: 1 
+CPU0 Address: 0 State: S Data: 0
+CPU1 Address: 0 State: M Data: 100
+CPU2 Address: 0 State: Not in Cache
+CPU3 Address: 0 State: Not in Cache
+
+Expected Transition: Invalid to Modified due to CPU Write
+CPU2 Writes to Address: 1 with Data: 0
+Sending Message: Type=WriteMiss, Address=1, SourceID=2, DestID=2, Data: 0
+Directory received message type: WriteMiss for address: 1 from CPU2, Data: 0
+Sending Message: Type=DataValueReply, Address=1, SourceID=2, DestID=2, Data: 0
+CPU2 handling message type: DataValueReply for address: 1, Data: 0
+CPU2 Received DataValueReply for Address: 1 Data: 0
+Directory (2) Entry State: Address=1, State=EXCLUSIVE
+Sharers: 2 
+Directory (2) Entry State: Address=1, State=EXCLUSIVE
+Sharers: 2 
+CPU0 Address: 1 State: Not in Cache
+CPU1 Address: 1 State: Not in Cache
+CPU2 Address: 1 State: M Data: 0
+CPU3 Address: 1 State: Not in Cache
+
+Expected Transition: Shared to Invalid due to Invalidate
+CPU3 Reads from Address: 2
+Sending Message: Type=ReadMiss, Address=2, SourceID=3, DestID=3, Data: 0
+Directory received message type: ReadMiss for address: 2 from CPU3, Data: 0
+RAM Read at Address: 2, Data: 0
+Sending Message: Type=DataValueReply, Address=2, SourceID=3, DestID=3, Data: 0
+CPU3 handling message type: DataValueReply for address: 2, Data: 0
+CPU3 Received DataValueReply for Address: 2 Data: 0
+Directory (3) Entry State: Address=2, State=SHARED
+Sharers: 3 
+Directory (3) Entry State: Address=2, State=SHARED
+Sharers: 3 
+CPU0 Address: 2 State: Not in Cache
+CPU1 Address: 2 State: Not in Cache
+CPU2 Address: 2 State: Not in Cache
+CPU3 Address: 2 State: S Data: 0
+
+Expected Transition: Modified to Shared due to Read Miss
+CPU1 Reads from Address: 3
+Sending Message: Type=ReadMiss, Address=3, SourceID=1, DestID=1, Data: 0
+Directory received message type: ReadMiss for address: 3 from CPU1, Data: 0
+RAM Read at Address: 3, Data: 0
+Sending Message: Type=DataValueReply, Address=3, SourceID=1, DestID=1, Data: 0
+CPU1 handling message type: DataValueReply for address: 3, Data: 0
+CPU1 Received DataValueReply for Address: 3 Data: 0
+Directory (1) Entry State: Address=3, State=SHARED
+Sharers: 1 
+Directory (1) Entry State: Address=3, State=SHARED
+Sharers: 1 
+CPU0 Address: 3 State: Not in Cache
+CPU1 Address: 3 State: S Data: 0
+CPU2 Address: 3 State: Not in Cache
+CPU3 Address: 3 State: Not in Cache
+
+Expected Transition: Exclusive to Shared due to Read Miss
+CPU0 Reads from Address: 4
+Sending Message: Type=ReadMiss, Address=4, SourceID=0, DestID=0, Data: 0
+Directory received message type: ReadMiss for address: 4 from CPU0, Data: 0
+RAM Read at Address: 4, Data: 0
+Sending Message: Type=DataValueReply, Address=4, SourceID=0, DestID=0, Data: 0
+CPU0 handling message type: DataValueReply for address: 4, Data: 0
+CPU0 Received DataValueReply for Address: 4 Data: 0
+Directory (0) Entry State: Address=4, State=SHARED
+Sharers: 0 
+Directory (0) Entry State: Address=4, State=SHARED
+Sharers: 0 
+CPU0 Address: 4 State: S Data: 0
+CPU1 Address: 4 State: Not in Cache
+CPU2 Address: 4 State: Not in Cache
+CPU3 Address: 4 State: Not in Cache
+
+Expected Transition: Write Miss on Exclusive Block
+CPU2 Writes to Address: 10 with Data: 0
+CPU0 Address: 10 State: Not in Cache
+CPU1 Address: 10 State: Not in Cache
+CPU2 Address: 10 State: M Data: 0
+CPU3 Address: 10 State: Not in Cache
+
+Expected Transition: Read Miss on Modified Block
+CPU3 Reads from Address: 11
+CPU3 Reads from Address: 11 Data: 0
+CPU3 Received Data: 0
+CPU0 Address: 11 State: Not in Cache
+CPU1 Address: 11 State: Not in Cache
+CPU2 Address: 11 State: Not in Cache
+CPU3 Address: 11 State: S Data: 0
+
+Expected Transition: Shared to Invalid due to Other CPU Write
+CPU0 Writes to Address: 13 with Data: 250
+CPU0 Address: 13 State: M Data: 250
+CPU1 Address: 13 State: Not in Cache
+CPU2 Address: 13 State: Not in Cache
+CPU3 Address: 13 State: Not in Cache
+
+Expected Transition: Modified to Invalid (Direct Invalidation)
+CPU1 Writes to Address: 14 with Data: 0
+CPU0 Address: 14 State: Not in Cache
+CPU1 Address: 14 State: M Data: 0
+CPU2 Address: 14 State: Not in Cache
+CPU3 Address: 14 State: Not in Cache
+
+Expected Transition: Invalid to Shared due to CPU Read
+CPU0 Reads from Address: 0
+CPU0 Reads from Address: 0 Data: 0
+CPU0 Received Data: 0
+CPU0 Address: 0 State: S Data: 0
+CPU1 Address: 0 State: M Data: 100
+CPU2 Address: 0 State: Not in Cache
+CPU3 Address: 0 State: Not in Cache
+
+Expected Transition: Shared to Modified due to CPU Write
+CPU1 Writes to Address: 0 with Data: 100
+CPU0 Address: 0 State: S Data: 0
+CPU1 Address: 0 State: M Data: 100
+CPU2 Address: 0 State: Not in Cache
+CPU3 Address: 0 State: Not in Cache
+
+Expected Transition: Invalid to Modified due to CPU Write
+CPU2 Writes to Address: 1 with Data: 0
+CPU0 Address: 1 State: Not in Cache
+CPU1 Address: 1 State: Not in Cache
+CPU2 Address: 1 State: M Data: 0
+CPU3 Address: 1 State: Not in Cache
+
+Expected Transition: Shared to Invalid due to Invalidate
+CPU3 Reads from Address: 2
+CPU3 Reads from Address: 2 Data: 0
+CPU3 Received Data: 0
+CPU0 Address: 2 State: Not in Cache
+CPU1 Address: 2 State: Not in Cache
+CPU2 Address: 2 State: Not in Cache
+CPU3 Address: 2 State: S Data: 0
+
+Expected Transition: Modified to Shared due to Read Miss
+CPU1 Reads from Address: 3
+CPU1 Reads from Address: 3 Data: 0
+CPU1 Received Data: 0
+CPU0 Address: 3 State: Not in Cache
+CPU1 Address: 3 State: S Data: 0
+CPU2 Address: 3 State: Not in Cache
+CPU3 Address: 3 State: Not in Cache
+
+Expected Transition: Exclusive to Shared due to Read Miss
+CPU0 Reads from Address: 4
+CPU0 Reads from Address: 4 Data: 0
+CPU0 Received Data: 0
+CPU0 Address: 4 State: S Data: 0
+CPU1 Address: 4 State: Not in Cache
+CPU2 Address: 4 State: Not in Cache
+CPU3 Address: 4 State: Not in Cache
+
+Expected Transition: Write Miss on Exclusive Block
+CPU2 Writes to Address: 10 with Data: 0
+CPU0 Address: 10 State: Not in Cache
+CPU1 Address: 10 State: Not in Cache
+CPU2 Address: 10 State: M Data: 0
+CPU3 Address: 10 State: Not in Cache
+
+Expected Transition: Read Miss on Modified Block
+CPU3 Reads from Address: 11
+CPU3 Reads from Address: 11 Data: 0
+CPU3 Received Data: 0
+CPU0 Address: 11 State: Not in Cache
+CPU1 Address: 11 State: Not in Cache
+CPU2 Address: 11 State: Not in Cache
+CPU3 Address: 11 State: S Data: 0
+
+Expected Transition: Shared to Invalid due to Other CPU Write
+CPU0 Writes to Address: 13 with Data: 250
+CPU0 Address: 13 State: M Data: 250
+CPU1 Address: 13 State: Not in Cache
+CPU2 Address: 13 State: Not in Cache
+CPU3 Address: 13 State: Not in Cache
+
+Expected Transition: Modified to Invalid (Direct Invalidation)
+CPU1 Writes to Address: 14 with Data: 0
+CPU0 Address: 14 State: Not in Cache
+CPU1 Address: 14 State: M Data: 0
+CPU2 Address: 14 State: Not in Cache
+CPU3 Address: 14 State: Not in Cache
+
+Expected Transition: Invalid to Shared due to CPU Read
+CPU0 Reads from Address: 0
+CPU0 Reads from Address: 0 Data: 0
+CPU0 Received Data: 0
+CPU0 Address: 0 State: S Data: 0
+CPU1 Address: 0 State: M Data: 100
+CPU2 Address: 0 State: Not in Cache
+CPU3 Address: 0 State: Not in Cache
+
+Expected Transition: Shared to Modified due to CPU Write
+CPU1 Writes to Address: 0 with Data: 100
+CPU0 Address: 0 State: S Data: 0
+CPU1 Address: 0 State: M Data: 100
+CPU2 Address: 0 State: Not in Cache
+CPU3 Address: 0 State: Not in Cache
+
+Expected Transition: Invalid to Modified due to CPU Write
+CPU2 Writes to Address: 1 with Data: 0
+CPU0 Address: 1 State: Not in Cache
+CPU1 Address: 1 State: Not in Cache
+CPU2 Address: 1 State: M Data: 0
+CPU3 Address: 1 State: Not in Cache
+
+Expected Transition: Shared to Invalid due to Invalidate
+CPU3 Reads from Address: 2
+CPU3 Reads from Address: 2 Data: 0
+CPU3 Received Data: 0
+CPU0 Address: 2 State: Not in Cache
+CPU1 Address: 2 State: Not in Cache
+CPU2 Address: 2 State: Not in Cache
+CPU3 Address: 2 State: S Data: 0
+
+Expected Transition: Modified to Shared due to Read Miss
+CPU1 Reads from Address: 3
+CPU1 Reads from Address: 3 Data: 0
+CPU1 Received Data: 0
+CPU0 Address: 3 State: Not in Cache
+CPU1 Address: 3 State: S Data: 0
+CPU2 Address: 3 State: Not in Cache
+CPU3 Address: 3 State: Not in Cache
+
+Expected Transition: Exclusive to Shared due to Read Miss
+CPU0 Reads from Address: 4
+CPU0 Reads from Address: 4 Data: 0
+CPU0 Received Data: 0
+CPU0 Address: 4 State: S Data: 0
+CPU1 Address: 4 State: Not in Cache
+CPU2 Address: 4 State: Not in Cache
+CPU3 Address: 4 State: Not in Cache
+
+Expected Transition: Write Miss on Exclusive Block
+CPU2 Writes to Address: 10 with Data: 0
+CPU0 Address: 10 State: Not in Cache
+CPU1 Address: 10 State: Not in Cache
+CPU2 Address: 10 State: M Data: 0
+CPU3 Address: 10 State: Not in Cache
+
+Expected Transition: Read Miss on Modified Block
+CPU3 Reads from Address: 11
+CPU3 Reads from Address: 11 Data: 0
+CPU3 Received Data: 0
+CPU0 Address: 11 State: Not in Cache
+CPU1 Address: 11 State: Not in Cache
+CPU2 Address: 11 State: Not in Cache
+CPU3 Address: 11 State: S Data: 0
+
+Expected Transition: Shared to Invalid due to Other CPU Write
+CPU0 Writes to Address: 13 with Data: 250
+CPU0 Address: 13 State: M Data: 250
+CPU1 Address: 13 State: Not in Cache
+CPU2 Address: 13 State: Not in Cache
+CPU3 Address: 13 State: Not in Cache
+
+Expected Transition: Modified to Invalid (Direct Invalidation)
+CPU1 Writes to Address: 14 with Data: 0
+CPU0 Address: 14 State: Not in Cache
+CPU1 Address: 14 State: M Data: 0
+CPU2 Address: 14 State: Not in Cache
+CPU3 Address: 14 State: Not in Cache
+
+Expected Transition: Invalid to Shared due to CPU Read
+CPU0 Reads from Address: 0
+CPU0 Reads from Address: 0 Data: 0
+CPU0 Received Data: 0
+CPU0 Address: 0 State: S Data: 0
+CPU1 Address: 0 State: M Data: 100
+CPU2 Address: 0 State: Not in Cache
+CPU3 Address: 0 State: Not in Cache
+
+Expected Transition: Shared to Modified due to CPU Write
+CPU1 Writes to Address: 0 with Data: 100
+CPU0 Address: 0 State: S Data: 0
+CPU1 Address: 0 State: M Data: 100
+CPU2 Address: 0 State: Not in Cache
+CPU3 Address: 0 State: Not in Cache
+
+Expected Transition: Invalid to Modified due to CPU Write
+CPU2 Writes to Address: 1 with Data: 0
+CPU0 Address: 1 State: Not in Cache
+CPU1 Address: 1 State: Not in Cache
+CPU2 Address: 1 State: M Data: 0
+CPU3 Address: 1 State: Not in Cache
+
+Expected Transition: Shared to Invalid due to Invalidate
+CPU3 Reads from Address: 2
+CPU3 Reads from Address: 2 Data: 0
+CPU3 Received Data: 0
+CPU0 Address: 2 State: Not in Cache
+CPU1 Address: 2 State: Not in Cache
+CPU2 Address: 2 State: Not in Cache
+CPU3 Address: 2 State: S Data: 0
+
+Expected Transition: Modified to Shared due to Read Miss
+CPU1 Reads from Address: 3
+CPU1 Reads from Address: 3 Data: 0
+CPU1 Received Data: 0
+CPU0 Address: 3 State: Not in Cache
+CPU1 Address: 3 State: S Data: 0
+CPU2 Address: 3 State: Not in Cache
+CPU3 Address: 3 State: Not in Cache
+
+Expected Transition: Exclusive to Shared due to Read Miss
+CPU0 Reads from Address: 4
+CPU0 Reads from Address: 4 Data: 0
+CPU0 Received Data: 0
+CPU0 Address: 4 State: S Data: 0
+CPU1 Address: 4 State: Not in Cache
+CPU2 Address: 4 State: Not in Cache
+CPU3 Address: 4 State: Not in Cache
+
+=======================Simulation Ended=======================
+Non-zero RAM Contents:
